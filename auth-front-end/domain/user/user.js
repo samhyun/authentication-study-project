@@ -8,4 +8,9 @@ export default class User {
         this.firstName = '';
         this.mobile = '';
     }
+
+
+    validatePassword() {
+        return this.password === this.confirmPassword;
+    }
 }

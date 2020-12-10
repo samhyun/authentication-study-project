@@ -19,11 +19,11 @@
               </div>
 
               <div class="col-span-6 sm:col-span-2">
-                <text-field type="text" v-model="user.lastName" label="성"></text-field>
+                <text-field v-model="user.lastName" label="성"></text-field>
               </div>
 
               <div class="col-span-6 sm:col-span-2">
-                <text-field type="text" v-model="user.firstName" label="이름"></text-field>
+                <text-field v-model="user.firstName" label="이름"></text-field>
               </div>
 
               <div class="col-span-6 sm:col-span-2">
@@ -33,7 +33,6 @@
               <div class="col-span-6 sm:col-span-3">
                 <text-field v-model="user.mobile" label="휴대전화 번호"></text-field>
               </div>
-
 
 <!--              <div class="col-span-6 sm:col-span-3">-->
 <!--                <select id="country" name="country" autocomplete="country"-->
