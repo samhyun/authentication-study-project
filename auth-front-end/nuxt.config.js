@@ -4,6 +4,9 @@ export default {
     buildModules: [
         '@nuxtjs/tailwindcss'
     ],
+    router: {
+        middleware: ['pageTitle']
+    },
     tailwindcss: {
         config: {
             plugins: [tailwindTypography]
@@ -11,4 +14,4 @@ export default {
     },
     plugins: ['~/plugins/global-components']
 
-}
+};

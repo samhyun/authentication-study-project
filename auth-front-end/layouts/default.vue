@@ -43,7 +43,7 @@
               <!-- Profile dropdown -->
               <div class="ml-3 relative">
                 <div>
-                  <button
+                  <button @click="visibleProfileDropdown = !visibleProfileDropdown"
                       class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                       id="user-menu" aria-haspopup="true">
                     <span class="sr-only">Open user menu</span>
@@ -62,7 +62,7 @@
                     From: "transform opacity-100 scale-100"
                     To: "transform opacity-0 scale-95"
                 -->
-                <div
+                <div v-show="visibleProfileDropdown"
                     class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
                     role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
@@ -165,38 +165,53 @@
       </div>
     </nav>
 
-    <header class="bg-white shadow">
-      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold leading-tight text-gray-900">
-          Dashboard
-        </h1>
-      </div>
-    </header>
-    <main>
-      <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <nuxt></nuxt>
-        <!-- Replace with your content -->
-        <!--        <div class="px-4 py-6 sm:px-0">-->
-        <!--          <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">-->
-        <!--            <nuxt></nuxt>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!-- /End replace -->
-      </div>
-    </main>
+    <div @click="onClickTest">
+      <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold leading-tight text-gray-900">
+            {{title}}
+          </h1>
+        </div>
+      </header>
+      <main>
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <nuxt></nuxt>
+          <!-- Replace with your content -->
+          <!--        <div class="px-4 py-6 sm:px-0">-->
+          <!--          <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">-->
+          <!--            <nuxt></nuxt>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!-- /End replace -->
+        </div>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
-module.exports = {
+import {mapState} from 'vuex';
+
+export default {
   data: function () {
     return {
-      greeting: 'Hello'
+      greeting: 'Hello',
+      visibleProfileDropdown: false
     }
   },
   head: {
     bodyAttrs: {
       class: 'bg-gray-50'
+    }
+  },
+  computed: mapState({
+    title: state => state.layout.title
+  }),
+  methods: {
+    onClickTest() {
+      if (this.visibleProfileDropdown) {
+        this.visibleProfileDropdown = false;
+      }
     }
   }
 }

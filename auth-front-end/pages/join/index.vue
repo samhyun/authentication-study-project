@@ -7,8 +7,7 @@
             <div class="px-4 py-5 bg-white sm:p-6">
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">
-                  <s-input v-model="testValue" label="test"></s-input>
-                  {{testValue}}
+                  <text-field v-model="user.email" label="email"></text-field>
 <!--                  <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>-->
 <!--                  <input type="text" name="first_name" id="first_name" autocomplete="given-name"-->
 <!--                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-xs h-10 px-2">-->
@@ -62,6 +61,7 @@
               </div>
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+              {{testTodo}}
               <button type="submit"
                       class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save
@@ -75,13 +75,24 @@
 </template>
 
 <script>
-import SInput from '~/component/SInput';
+import {mapState} from 'vuex';
+import User from '@/domain/user/user';
+
 export default {
   name: "join",
+  computed: mapState({
+    todo: state => state.todos.list,
+    testTodo(state) {
+      return state.todos.list[0] + this.user.email;
+    }
+  }),
   data() {
     return {
-      testValue: '11234'
+      user: new User()
+
     }
+  },
+  created() {
   }
 }
 </script>

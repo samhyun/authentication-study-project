@@ -1,4 +1,4 @@
 import Vue from 'vue';
-import SInput from '@/component/SInput';
+import TextField from '@/component/input/TextField';
 
-Vue.component('SInput', SInput)
+Vue.component('TextField', TextField)
