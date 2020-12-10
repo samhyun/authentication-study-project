@@ -1,10 +1,14 @@
 export const state = () => ({
-    title: 'Home'
+    title: 'Home',
+    sequence: 0
 });
 
 export const mutations = {
-    setTitle(state, {title}) {
+    setTitle(state, title) {
         state.title = title;
+    },
+    increment(state) {
+        state.sequence++;
     }
 };
 

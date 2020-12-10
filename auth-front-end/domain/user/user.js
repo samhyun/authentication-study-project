@@ -6,5 +6,6 @@ export default class User {
         this.nickname = '';
         this.lastName = '';
         this.firstName = '';
+        this.mobile = '';
     }
 }

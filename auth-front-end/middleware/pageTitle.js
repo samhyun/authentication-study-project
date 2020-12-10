@@ -5,5 +5,5 @@ const TITLE = {
 };
 
 export default function setPageTitle({store, route}) {
-    store.commit('layout/setTitle', {title: TITLE[route.name]});
+    store.commit('layout/setTitle', TITLE[route.name]);
 }
