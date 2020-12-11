@@ -9,8 +9,4 @@ export default class User {
         this.mobile = '';
     }
 
-
-    validatePassword() {
-        return this.password === this.confirmPassword;
-    }
 }
