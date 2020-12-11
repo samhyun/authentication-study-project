@@ -1,7 +1,11 @@
-package com.samhyun.auth.user.domain;
+package com.samhyun.auth.domain;
 
+import com.samhyun.auth.dto.UserDto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +14,8 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -35,4 +41,12 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date modifiedAt;
+
+    public UserDto convertToDto() {
+        return new ModelMapper().map(this, UserDto.class);
+    }
+
+    public boolean validate() {
+        return true;
+    }
 }
