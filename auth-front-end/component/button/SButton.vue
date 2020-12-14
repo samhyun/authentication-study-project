@@ -1,6 +1,5 @@
 <template>
-  <button type="submit"
-          :class="clazz">
+  <button :class="clazz" @click="$emit('click', $event)" :type="type">
     <slot>버튼</slot>
   </button>
 </template>
@@ -27,6 +26,11 @@ export default {
     color: {
       type: String,
       default: 'indigo',
+      required: false
+    },
+    type: {
+      type: String,
+      default: 'button',
       required: false
     }
 
