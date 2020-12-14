@@ -93,8 +93,6 @@ export default {
 
     };
   },
-  created() {
-  }
 };
 </script>
 
