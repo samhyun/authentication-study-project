@@ -1,7 +1,6 @@
 package com.samhyun.auth.service;
 
 import com.samhyun.auth.common.exception.InvalidDataExceptionStatus;
-import com.samhyun.auth.common.exception.InvalidUserDataException;
 import com.samhyun.auth.domain.User;
 import com.samhyun.auth.dto.UserDto;
 import com.samhyun.auth.extension.TimingExtension;
