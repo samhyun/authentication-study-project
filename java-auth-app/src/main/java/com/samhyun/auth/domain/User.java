@@ -1,11 +1,12 @@
 package com.samhyun.auth.domain;
 
 import com.samhyun.auth.dto.UserDto;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -42,11 +43,10 @@ public class User {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Date modifiedAt;
 
-    public UserDto convertToDto() {
-        return new ModelMapper().map(this, UserDto.class);
+    public User(UserDto userDto) {
+        if (userDto != null) {
+            BeanUtils.copyProperties(userDto, this);
+        }
     }
 
-    public boolean validate() {
-        return true;
-    }
 }

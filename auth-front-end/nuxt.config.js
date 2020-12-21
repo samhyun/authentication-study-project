@@ -6,6 +6,9 @@ export default {
         '@nuxtjs/axios',
         '@nuxtjs/proxy'
     ],
+    axios: {
+        proxy: true
+    },
     proxy: {
         '/api/': {target: 'http://localhost:8080', pathRewrite: {'/api/': '/'}},
     },
@@ -17,5 +20,5 @@ export default {
             plugins: [tailwindTypography]
         }
     },
-    plugins: ['~/plugins/global-components']
+    plugins: ['~/plugins/global-components', '@/plugins/axios', '@/plugins/api-service']
 };

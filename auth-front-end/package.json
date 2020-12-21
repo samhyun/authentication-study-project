@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.3",
-    "@nuxtjs/proxy": "^2.0.1",
     "nuxt": "^2.14.10"
   }
 }

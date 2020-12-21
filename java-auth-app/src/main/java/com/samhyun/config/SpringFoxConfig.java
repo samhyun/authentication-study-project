@@ -1,4 +1,4 @@
-package com.samhyun.auth.swagger.config;
+package com.samhyun.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

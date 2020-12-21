@@ -1,4 +1,4 @@
-package com.samhyun.auth.swagger.config;
+package com.samhyun.config;
 
 
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,7 @@ public class SpringFoxWebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
         registry.
                 addResourceHandler("/swagger-ui.html**").addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
         registry.

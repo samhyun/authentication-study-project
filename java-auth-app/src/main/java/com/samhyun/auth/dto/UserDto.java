@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -17,23 +18,31 @@ public class UserDto {
 
     private long id;
 
+    @NotNull
     private String email;
 
+    @NotNull
     private String nickname;
 
+    @NotNull
     private String password;
 
+    @NotNull
     private String firstName;
 
+    @NotNull
     private String lastName;
 
+    @NotNull
     private String mobile;
 
     private Date createdAt;
 
     private Date modifiedAt;
 
-    public User convertToUser() {
-        return new ModelMapper().map(this, User.class);
+    public UserDto(User user) {
+        if (user != null) {
+            BeanUtils.copyProperties(user, this, "password");
+        }
     }
 }

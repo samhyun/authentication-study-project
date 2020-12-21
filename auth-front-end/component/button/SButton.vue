@@ -12,7 +12,7 @@ export default {
   mixins: [AbstractClassComponent],
   data() {
     return {
-      defaultClass: ['inline-flex', 'justify-center', 'py-2', 'px-4', 'border',
+      defaultClass: ['inline-flex', 'justify-center', 'py-2', 'px-4', 'border', 'disabled:opacity-50', 'disabled:cursor-not-allowed',
         'border-transparent', 'shadow-sm', 'font-medium',
         'rounded-md', 'focus:outline-none', 'focus:ring-2', 'focus:ring-offset-2']
     }
@@ -32,8 +32,7 @@ export default {
       type: String,
       default: 'button',
       required: false
-    }
-
+    },
   },
   computed: {
     sizeClass() {

@@ -1,10 +1,10 @@
-package com.samhyun.auth;
+package com.samhyun;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JavaAuthAppApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {
