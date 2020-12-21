@@ -6,7 +6,6 @@ export default {
         }
     },
     computed: {
-
         sizeClass() {
             return [];
         },
@@ -29,7 +28,7 @@ export default {
                 ...this.defaultClass,
                 ...this.sizeClass,
                 ...this.colorClass,
-                ...this.appendClass
+                ...this.appendClass,
             ];
         }
     }

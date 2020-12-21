@@ -1,4 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
     theme: {
@@ -7,5 +7,9 @@ module.exports = {
                 primary: defaultTheme.colors.green
             }
         }
-    }
-}
+    },
+    variants: {
+        opacity: ({after}) => after(['disabled']),
+        cursor: ({after}) => after(['disabled'])
+    },
+};
