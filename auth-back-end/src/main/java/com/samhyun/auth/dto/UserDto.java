@@ -2,10 +2,7 @@ package com.samhyun.auth.dto;
 
 import com.samhyun.auth.common.validate.RegexpMap;
 import com.samhyun.auth.domain.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.beans.BeanUtils;
 
 import javax.validation.constraints.NotNull;
@@ -15,16 +12,15 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Builder
 public class UserDto {
-
 
     private long id;
 
     @NotNull
     @Pattern(regexp = RegexpMap.EMAIL)
     private String email;
-
 
     @NotNull
     @Pattern(regexp = RegexpMap.NICKNAME)

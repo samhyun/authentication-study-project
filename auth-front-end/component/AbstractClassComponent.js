@@ -3,7 +3,7 @@ export default {
     data() {
         return {
             defaultClass: []
-        }
+        };
     },
     computed: {
         sizeClass() {
@@ -13,12 +13,8 @@ export default {
             return [];
         },
         appendClass() {
-            if (this.$attrs['class']) {
-                if (typeof this.$attrs['class'] === 'string') {
-                    return this.$attrs['class'].split(' ');
-                } else {
-                    return this.$attrs['class'];
-                }
+            if (this.$el) {
+                return this.$el.classList;
             } else {
                 return [];
             }

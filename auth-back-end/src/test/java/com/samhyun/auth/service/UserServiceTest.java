@@ -43,8 +43,6 @@ public class UserServiceTest {
                         .mobile("0120123123")
                         .build()
 
-
-
         );
     }
 
@@ -54,7 +52,7 @@ public class UserServiceTest {
     @ParameterizedTest
     @MethodSource("userProvider")
     @DisplayName("회원 가입 테스트")
-    public void joinTest(UserDto user) throws InvalidUserDataException {
+    public void joinTest(UserDto user) {
 //        when
         UserDto savedUser = userService.create(user);
         log.info("savedUser : {} ", user);

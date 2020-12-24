@@ -1,4 +1,4 @@
-package com.samhyun.security;
+package com.samhyun.auth.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,15 +12,16 @@ import org.springframework.web.util.WebUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-class TokenAuthenticationHelper {
+public class TokenAuthenticationHelper {
     private static final long EXPIRATION_TIME = 1000 * 60 * 30; // 30 minutes
     private static final String SECRET = "ThisIsASecret";
-    private static final String COOKIE_BEARER = "COOKIE-BEARER";
+    public static final String COOKIE_BEARER = "COOKIE-BEARER";
 
     private TokenAuthenticationHelper() {
         throw new IllegalStateException("Utility class");
@@ -55,13 +56,13 @@ class TokenAuthenticationHelper {
                     .parseClaimsJws(token)
                     .getBody();
 
-            Collection<? extends GrantedAuthority> authorities =
-                    Arrays.stream(claims.get("authorities").toString().split(","))
-                            .map(SimpleGrantedAuthority::new)
-                            .collect(Collectors.toList());
+//            Collection<? extends GrantedAuthority> authorities =
+//                    Arrays.stream(claims.get("authorities").toString().split(","))
+//                            .map(SimpleGrantedAuthority::new)
+//                            .collect(Collectors.toList());
 
             String userName = claims.getSubject();
-            return userName != null ? new UsernamePasswordAuthenticationToken(userName, null, authorities) : null;
+            return userName != null ? new UsernamePasswordAuthenticationToken(userName, null, new ArrayList<>()) : null;
         }
         return null;
     }

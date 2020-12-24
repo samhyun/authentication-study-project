@@ -1,5 +1,6 @@
 package com.samhyun.auth.service;
 
+import com.samhyun.auth.common.exception.InvalidDataException;
 import com.samhyun.auth.common.exception.InvalidDataExceptionStatus;
 import com.samhyun.auth.domain.User;
 import com.samhyun.auth.dto.UserDto;
@@ -69,7 +70,7 @@ public class UserServiceUnitTest {
     @ParameterizedTest
     @MethodSource("userProvider")
     @DisplayName("회원 가입 테스트")
-    public void joinTest(UserDto user) throws InvalidUserDataException {
+    public void joinTest(UserDto user) {
 //        when then
         Assertions.assertEquals(1L, userService.create(user).getId());
     }
@@ -99,7 +100,7 @@ public class UserServiceUnitTest {
     public void testValidExistsEmail(String email) {
         Mockito.when(userRepository.existsByEmail(email)).thenReturn(true);
 
-        InvalidUserDataException exception = Assertions.assertThrows(InvalidUserDataException.class, () -> userService.isValidEmail(email));
+        InvalidDataException exception = Assertions.assertThrows(InvalidDataException.class, () -> userService.isValidEmail(email));
         Assertions.assertEquals(InvalidDataExceptionStatus.EXISTS_EMAIL, exception.getStatus());
     }
 
@@ -120,7 +121,7 @@ public class UserServiceUnitTest {
     @ParameterizedTest(name = "#{index} - Run test with username = {0}")
     @MethodSource("invalidEmailProvider")
     public void testInvalidEmail(String email) {
-        InvalidUserDataException exception = Assertions.assertThrows(InvalidUserDataException.class, () -> userService.isValidEmail(email));
+        InvalidDataException exception = Assertions.assertThrows(InvalidDataException.class, () -> userService.isValidEmail(email));
 
         Assertions.assertEquals(InvalidDataExceptionStatus.INVALID_EMAIL_FORMAT, exception.getStatus());
     }
@@ -151,7 +152,7 @@ public class UserServiceUnitTest {
     public void testValidExistsNickname(String nickname) {
         Mockito.when(userRepository.existsByNickname(nickname)).thenReturn(true);
 
-        InvalidUserDataException exception = Assertions.assertThrows(InvalidUserDataException.class, () -> userService.isValidNickname(nickname));
+        InvalidDataException exception = Assertions.assertThrows(InvalidDataException.class, () -> userService.isValidNickname(nickname));
         Assertions.assertEquals(InvalidDataExceptionStatus.EXISTS_NICKNAME, exception.getStatus());
     }
 
@@ -172,7 +173,7 @@ public class UserServiceUnitTest {
     @ParameterizedTest(name = "#{index} - Run test with username = {0}")
     @MethodSource("invalidNicknameProvider")
     public void testInvalidNickname(String nickname) {
-        InvalidUserDataException exception = Assertions.assertThrows(InvalidUserDataException.class, () -> userService.isValidNickname(nickname));
+        InvalidDataException exception = Assertions.assertThrows(InvalidDataException.class, () -> userService.isValidNickname(nickname));
 
         Assertions.assertEquals(InvalidDataExceptionStatus.INVALID_NICKNAME_FORMAT, exception.getStatus());
     }

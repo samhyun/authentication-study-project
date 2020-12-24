@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 @Service
-@Validated
 @RequiredArgsConstructor
 public class UserService {
 
@@ -31,7 +30,7 @@ public class UserService {
      * @param userDto user dto
      * @return saved user entity
      */
-    public UserDto create(@Valid UserDto userDto) {
+    public UserDto create(UserDto userDto) {
         return new UserDto(this.save(new User(userDto)));
     }
 

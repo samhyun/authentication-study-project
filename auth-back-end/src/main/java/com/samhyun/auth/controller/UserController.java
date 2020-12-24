@@ -27,4 +27,9 @@ public class UserController {
         return userService.isValidNickname(nickname);
     }
 
+
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
 }
