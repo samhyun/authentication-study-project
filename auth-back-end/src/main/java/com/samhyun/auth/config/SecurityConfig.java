@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
@@ -24,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserAuthService userAuthService;
     private final AuthenticationFailureHandler failureHandler;
+    private final AuthenticationSuccessHandler successHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -45,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().disable()
                 .csrf()
-                .ignoringAntMatchers("/login")
+                .ignoringAntMatchers("/auth/login")
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .formLogin().disable()
@@ -56,15 +58,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies(TokenAuthenticationHelper.COOKIE_BEARER).and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/login",
+                        "/auth/login",
                         "/auth/join",
+                        "/auth/principal",
                         "/user/valid/**",
                         "/swagger-**/**",
                         "/v2/api-docs"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new JWTLoginFilter("/login", authenticationManager(), failureHandler), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(
+                        new JWTLoginFilter("/auth/login", authenticationManager(), successHandler, failureHandler),
+                        UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         ;
 

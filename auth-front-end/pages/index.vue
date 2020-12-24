@@ -1,10 +1,9 @@
 <template>
   <div>
-
     <s-btn color="blue" dark @click="logout" >
       logout
     </s-btn>
-    <s-btn @click="test">
+    <s-btn @click="test" dark>
       test
     </s-btn>
   </div>

@@ -19,12 +19,16 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain) throws ServletException,
             IOException {
         try {
-            Authentication authentication = TokenAuthenticationHelper.getAuthentication(request);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            filterChain.doFilter(request, response);
+            String token = TokenAuthenticationHelper.getToken(request);
+
+            if (TokenAuthenticationHelper.validate(token)) {
+                Authentication authentication = TokenAuthenticationHelper.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException |
                 SignatureException | IllegalArgumentException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token expired");
         }
+        filterChain.doFilter(request, response);
     }
 }

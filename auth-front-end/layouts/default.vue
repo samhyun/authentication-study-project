@@ -2,85 +2,58 @@
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div>
     <nav class="bg-gray-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+              <!--              <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">-->
+              <nuxt-link to="/">
+                <img class="h-16 w-16" src="@/assets/img/android-chrome-512x512.png" alt="Workflow">
+              </nuxt-link>
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                <!--                <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>-->
+<!--                <nuxt-link to="/" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"-->
+<!--                           active-class="bg-gray-900 text-white">Home-->
+<!--                </nuxt-link>-->
+                <nuxt-link to="/board" class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                           active-class="bg-gray-900 text-white">Board
+                </nuxt-link>
 
-                <a href="#"
-                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+                <!--                <a href="#"-->
+                <!--                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>-->
 
-                <a href="#"
-                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                <!--                <a href="#"-->
+                <!--                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>-->
 
-                <a href="#"
-                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+                <!--                <a href="#"-->
+                <!--                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>-->
 
-                <a href="#"
-                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Reports</a>
+                <!--                <a href="#"-->
+                <!--                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Reports</a>-->
               </div>
             </div>
           </div>
           <div class="hidden md:block">
-            <div class="ml-4 flex items-center md:ml-6">
-              <button
-                  class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                <span class="sr-only">View notifications</span>
-                <!-- Heroicon name: bell -->
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-                </svg>
-              </button>
+            <div class="ml-4 flex items-center md:ml-6" v-if="!authenticated">
+              <nuxt-link to="/login">
+                <font-awesome-icon icon="sign-in-alt" size="lg" class="text-white cursor-pointer mx-3"/>
+              </nuxt-link>
+              <nuxt-link to="/join">
+                <font-awesome-icon icon="user-plus" size="lg" class="text-white cursor-pointer mx-3"/>
+              </nuxt-link>
+            </div>
 
+            <div class="ml-4 flex items-center md:ml-6" v-if="authenticated">
               <!-- Profile dropdown -->
-              <div class="ml-3 relative">
-                <div>
-                  <button @click="visibleProfileDropdown = !visibleProfileDropdown"
-                      class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                    <span class="sr-only">View notifications</span>
-<!--                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
-<!--                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />-->
-<!--                    </svg>-->
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <!-- Heroicon name: bell -->
-<!--                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"-->
-<!--                         stroke="currentColor" aria-hidden="true">-->
-<!--                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-<!--                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>-->
-<!--                    </svg>-->
-                  </button>
-<!--                  <button @click="visibleProfileDropdown = !visibleProfileDropdown"-->
-<!--                      class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"-->
-<!--                      id="user-menu" aria-haspopup="true">-->
-<!--                    <span class="sr-only">Open user menu</span>-->
-<!--                    <img class="h-8 w-8 rounded-full"-->
-<!--                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"-->
-<!--                         alt="">-->
-<!--                  </button>-->
-                </div>
-                <!--
-                  Profile dropdown panel, show/hide based on dropdown state.
-
-                  Entering: "transition ease-out duration-100"
-                    From: "transform opacity-0 scale-95"
-                    To: "transform opacity-100 scale-100"
-                  Leaving: "transition ease-in duration-75"
-                    From: "transform opacity-100 scale-100"
-                    To: "transform opacity-0 scale-95"
-                -->
+              <div class="relative mx-3">
+                <font-awesome-icon icon="user-alt" size="lg" class="text-white cursor-pointer"
+                                   @click="visibleProfileDropdown = !visibleProfileDropdown"/>
                 <div v-show="visibleProfileDropdown"
-                    class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
-                    role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                     class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
+                     role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
                     Profile</a>
 
@@ -185,7 +158,7 @@
       <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <h1 class="text-3xl font-bold leading-tight text-gray-900">
-            {{title}}
+            {{ title }}
           </h1>
         </div>
       </header>
@@ -212,23 +185,27 @@ export default {
   data: function () {
     return {
       greeting: 'Hello',
-      visibleProfileDropdown: false
-    }
+      visibleProfileDropdown: false,
+    };
   },
+  middleware: ['auth'],
   head: {
     bodyAttrs: {
-      class: 'bg-gray-50'
-    }
+      class: 'bg-gray-50',
+    },
   },
-  computed: mapState({
-    title: state => state.layout.title
-  }),
+  computed: {
+    ...mapState({
+      title: state => state.layout.title,
+      authenticated: state => state.auth.principal
+    }),
+  },
   methods: {
     onClickTest() {
       if (this.visibleProfileDropdown) {
         this.visibleProfileDropdown = false;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

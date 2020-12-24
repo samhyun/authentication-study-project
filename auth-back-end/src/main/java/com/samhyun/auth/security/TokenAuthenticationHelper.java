@@ -1,6 +1,7 @@
 package com.samhyun.auth.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,10 +13,7 @@ import org.springframework.web.util.WebUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TokenAuthenticationHelper {
@@ -45,25 +43,36 @@ public class TokenAuthenticationHelper {
         res.addCookie(cookie);
     }
 
-    static Authentication getAuthentication(HttpServletRequest request) {
+    static boolean validate(String token) {
+        if (token == null) {
+            return false;
+        }
+        try {
+            Jws<Claims> claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
+            return !claims.getBody().getExpiration().before(new Date());
+        } catch (Exception e) {
+            return false;
+        }
 
+    }
+
+    static String getToken(HttpServletRequest request) {
         Cookie cookie = WebUtils.getCookie(request, COOKIE_BEARER);
-        String token = cookie != null ? cookie.getValue() : null;
+        return cookie != null ? cookie.getValue() : null;
+    }
 
-        if (token != null) {
-            Claims claims = Jwts.parser()
-                    .setSigningKey(SECRET)
-                    .parseClaimsJws(token)
-                    .getBody();
+    static Authentication getAuthentication(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(token)
+                .getBody();
 
 //            Collection<? extends GrantedAuthority> authorities =
 //                    Arrays.stream(claims.get("authorities").toString().split(","))
 //                            .map(SimpleGrantedAuthority::new)
 //                            .collect(Collectors.toList());
 
-            String userName = claims.getSubject();
-            return userName != null ? new UsernamePasswordAuthenticationToken(userName, null, new ArrayList<>()) : null;
-        }
-        return null;
+        String userName = claims.getSubject();
+        return userName != null ? new UsernamePasswordAuthenticationToken(userName, null, new ArrayList<>()) : null;
     }
 }

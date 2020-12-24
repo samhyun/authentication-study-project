@@ -1,13 +1,24 @@
-import AbstractApiService from '@/domain/abstract/api';
+import AbstractApiService from '../abstract/api';
 
 const AUTH_ENDPOINT = '/api/auth';
 
-export default class AuthApiService extends AbstractApiService{
+export default class AuthApiService extends AbstractApiService {
     constructor() {
         super(AUTH_ENDPOINT);
     }
 
-    async join(user) {
+    join(user) {
         return this.post('join', user);
+    }
+
+    login(email, password) {
+        return this.post('login', {
+                email, password,
+            },
+        );
+    }
+
+    fetchPrincipal() {
+        return this.get('principal');
     }
 }

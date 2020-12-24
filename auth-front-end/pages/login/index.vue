@@ -13,7 +13,7 @@
         <!--          </a>-->
         <!--        </p>-->
       </div>
-      <form class="mt-8 space-y-6" @submit.prevent="login">
+      <form class="mt-8 space-y-6" @submit.prevent="submit">
         <input type="hidden" name="remember" value="true">
         <div class="rounded-md shadow-sm -space-y-px">
           <text-field class="rounded-b-none" required type="email" v-model="email"></text-field>
@@ -64,6 +64,8 @@
   </div>
 </template>
 <script>
+import {mapActions} from 'vuex';
+
 export default {
   name: 'login',
   data() {
@@ -73,17 +75,13 @@ export default {
     };
   },
   methods: {
-    login() {
-      this.$axios.$post('/api/login', {
-            email: this.email,
-            password: this.password,
-          }, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-          },
-      );
-    },
+    ...mapActions('auth', [
+        'login'
+    ]),
+    async submit() {
+      await this.login({email: this.email, password: this.password});
+      await this.$router.push('/');
+    }
   },
 };
 </script>

@@ -20,5 +20,5 @@ export default {
             plugins: [tailwindTypography]
         }
     },
-    plugins: ['~/plugins/global-components', '@/plugins/axios', '@/plugins/api-service']
+    plugins: ['~/plugins/global-components', '@/plugins/axios', '@/plugins/api-service', '@/plugins/fontawesome']
 };
