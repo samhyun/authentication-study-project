@@ -2,7 +2,7 @@ import AbstractClassComponent from '@/component/AbstractClassComponent';
 
 export default {
     name: 'AbstractInput',
-    mixins: [AbstractClassComponent],
+    // mixins: [AbstractClassComponent],
     data: function () {
         return {
             inputValue: this.value,

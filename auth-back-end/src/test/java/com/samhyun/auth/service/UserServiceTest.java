@@ -1,7 +1,5 @@
 package com.samhyun.auth.service;
 
-import com.samhyun.auth.common.exception.InvalidUserDataException;
-import com.samhyun.auth.domain.User;
 import com.samhyun.auth.dto.UserDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -30,12 +28,21 @@ public class UserServiceTest {
         return Stream.of(
                 UserDto.builder()
                         .email("test12@test.com")
-                        .firstName("test")
-                        .lastName("hi")
-                        .password("testsadf")
+                        .firstName("삼1현")
+                        .lastName("김")
+                        .password("test45@")
+                        .nickname("testasdfas")
+                        .mobile("0120123123")
+                        .build(),
+                UserDto.builder()
+                        .email("test12@test.com")
+                        .firstName("samhyunsamhyunsamhyun")
+                        .lastName("kim")
+                        .password("test45@")
                         .nickname("testasdfas")
                         .mobile("0120123123")
                         .build()
+
         );
     }
 
@@ -45,7 +52,7 @@ public class UserServiceTest {
     @ParameterizedTest
     @MethodSource("userProvider")
     @DisplayName("회원 가입 테스트")
-    public void joinTest(UserDto user) throws InvalidUserDataException {
+    public void joinTest(UserDto user) {
 //        when
         UserDto savedUser = userService.create(user);
         log.info("savedUser : {} ", user);

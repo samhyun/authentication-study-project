@@ -25,7 +25,7 @@
               </div>
 
               <div class="col-span-6 sm:col-span-3">
-                <text-field type="password" v-model="user.password" label="비밀번호" required pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%]).{6,}$"></text-field>
+                <text-field type="password" v-model="user.password" label="비밀번호" required pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%]).{6,}$"></text-field>
               </div>
 
               <div class="col-span-6 sm:col-span-3">
@@ -51,7 +51,7 @@
               </div>
 
               <div class="col-span-6 sm:col-span-3">
-                <text-field v-model="user.mobile" label="휴대전화 번호"></text-field>
+                <text-field v-model="user.mobile" label="휴대전화 번호" required></text-field>
               </div>
 
               <!--              <div class="col-span-6 sm:col-span-3">-->
@@ -114,7 +114,7 @@ export default {
       return this.user.password !== this.user.confirmPassword;
     },
     disabledSaveButton() {
-      return Object.keys(this.isValid).some(key => !this.isValid[key]) || !this.invalidPassword;
+      return Object.keys(this.isValid).some(key => !this.isValid[key]) || this.invalidPassword;
     }
   },
   data() {

@@ -1,4 +1,4 @@
-package com.samhyun.security;
+package com.samhyun.auth.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;

@@ -1,4 +1,4 @@
-package com.samhyun.config;
+package com.samhyun.auth.config;
 
 
 import org.springframework.context.annotation.Configuration;
