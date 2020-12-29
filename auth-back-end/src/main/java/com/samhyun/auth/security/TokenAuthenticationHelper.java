@@ -7,13 +7,13 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 public class TokenAuthenticationHelper {
@@ -66,11 +66,6 @@ public class TokenAuthenticationHelper {
                 .setSigningKey(SECRET)
                 .parseClaimsJws(token)
                 .getBody();
-
-//            Collection<? extends GrantedAuthority> authorities =
-//                    Arrays.stream(claims.get("authorities").toString().split(","))
-//                            .map(SimpleGrantedAuthority::new)
-//                            .collect(Collectors.toList());
 
         String userName = claims.getSubject();
         return userName != null ? new UsernamePasswordAuthenticationToken(userName, null, new ArrayList<>()) : null;
