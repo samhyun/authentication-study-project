@@ -15,4 +15,8 @@ export const actions = {
     async fetchPrincipal({commit}) {
         commit('setPrincipal', await this.$api.auth.fetchPrincipal());
     },
+    async logout() {
+        await this.$axios.$post('/api/logout');
+    },
+
 }

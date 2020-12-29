@@ -47,6 +47,9 @@
             </div>
 
             <div class="ml-4 flex items-center md:ml-6" v-if="authenticated">
+
+              <font-awesome-icon icon="sign-out-alt" size="lg" class="text-white cursor-pointer mx-3" @click="logout"/>
+
               <!-- Profile dropdown -->
               <div class="relative mx-3">
                 <font-awesome-icon icon="user-alt" size="lg" class="text-white cursor-pointer"
@@ -64,6 +67,9 @@
                     out</a>
                 </div>
               </div>
+<!--              <nuxt-link to="/log">-->
+
+<!--              </nuxt-link>-->
             </div>
           </div>
           <div class="-mr-2 flex md:hidden">
@@ -179,7 +185,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
 export default {
   data: function () {
@@ -205,6 +211,11 @@ export default {
       if (this.visibleProfileDropdown) {
         this.visibleProfileDropdown = false;
       }
+    },
+    // ...mapActions('auth', ['logout']),
+    async logout() {
+      await this.$store.dispatch('auth/logout');
+      window.location.reload();
     },
   },
 };
