@@ -4,6 +4,7 @@ export const state = () => ({
 
 export const mutations = {
     setPrincipal(state, principal) {
+        console.log(principal);
         state.principal = principal;
     },
 }

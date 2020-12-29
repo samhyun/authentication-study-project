@@ -17,7 +17,8 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 public class TokenAuthenticationHelper {
-    private static final long EXPIRATION_TIME = 1000 * 60 * 30; // 30 minutes
+    private static final long EXPIRATION_TIME = 1000L * 60 * 30; // 5 minutes
+    private static final int COOKIE_MAX_AGE = 3600;
     private static final String SECRET = "ThisIsASecret";
     public static final String COOKIE_BEARER = "COOKIE-BEARER";
 
@@ -40,6 +41,7 @@ public class TokenAuthenticationHelper {
         Cookie cookie = new Cookie(COOKIE_BEARER, jwt);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
+        cookie.setMaxAge(COOKIE_MAX_AGE);
         res.addCookie(cookie);
     }
 
